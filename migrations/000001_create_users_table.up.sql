@@ -3,6 +3,7 @@ CREATE TYPE user_role AS ENUM ('user', 'admin', 'moderator');
 
 CREATE TABLE IF NOT EXISTS users(
     pk_user bigserial PRIMARY KEY,
+    -- phone  VARCHAR(50) NOT NULL UNIQUE default 'default',
     created_at timestamp(0) with time zone NOT NULL default NOW(),
     email VARCHAR(255) NOT NULL UNIQUE,
     profile_pict TEXT DEFAULT 'default' not null,

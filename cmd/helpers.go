@@ -3,9 +3,11 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/julienschmidt/httprouter"
 )
 
 func (app *Application) ReadJSON(r *http.Request, input any) error {
@@ -38,11 +40,11 @@ func (app *Application) createToken(mail string) (string, error) {
 	return tokenString, nil
 }
 
-func (app *Application) WriteJSON(w http.ResponseWriter, data any) error {
+func (app *Application) WriteJSON(w http.ResponseWriter, data any, prefix string) error {
 	type envelope map[string]any
 
 	res := envelope{
-		"Response:": data,
+		prefix: data,
 	}
 
 	js, err := json.Marshal(res)
@@ -53,4 +55,15 @@ func (app *Application) WriteJSON(w http.ResponseWriter, data any) error {
 
 	w.Write(js)
 	return nil
+}
+
+func (app *Application) ReadUrlId(ps httprouter.Params) (int64, error) {
+
+	id, err := strconv.Atoi(ps.ByName("id"))
+	if err != nil {
+		return 0, err
+	}
+
+	return int64(id), nil
+
 }

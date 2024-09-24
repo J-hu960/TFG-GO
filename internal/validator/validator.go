@@ -1,9 +1,17 @@
 package validator
 
+import "regexp"
+
 type Validator struct {
 	Errors map[string]string
 }
 
+func ValidateMail(email string) bool {
+	// Expresión regular para validar el email
+	regex := `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
+	re := regexp.MustCompile(regex)
+	return re.MatchString(email)
+}
 func New() *Validator {
 	return &Validator{Errors: make(map[string]string)}
 }
