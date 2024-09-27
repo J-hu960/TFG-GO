@@ -31,7 +31,7 @@ type Config struct {
 
 type Application struct {
 	Config
-	logger *slog.Logger
+	Logger *slog.Logger
 	Models data.Models
 }
 
@@ -55,6 +55,7 @@ func main() {
 
 	app := Application{
 		Models: data.NewModels(db),
+		Logger: logger,
 	}
 
 	srv := &http.Server{

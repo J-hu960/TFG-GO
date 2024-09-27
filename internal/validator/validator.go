@@ -1,6 +1,8 @@
 package validator
 
-import "regexp"
+import (
+	"regexp"
+)
 
 type Validator struct {
 	Errors map[string]string
@@ -28,4 +30,13 @@ func (v *Validator) Check(ok bool, key, message string) {
 	if !ok {
 		v.AddError(key, message)
 	}
+}
+
+func PermittedValue[T comparable](input T, permitted []T) bool {
+	for _, v := range permitted {
+		if v == input {
+			return true
+		}
+	}
+	return false
 }

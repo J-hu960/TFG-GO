@@ -12,5 +12,6 @@ CREATE TABLE IF NOT EXISTS projects (
     founds_recieved INT NOT NULL DEFAULT 0,
     founds_expected INT NOT NULL,
     category PROJECT_CATEGORY[] NOT NULL,  -- Si es un array
-    id_creator BIGINT NOT NULL REFERENCES users(pk_user) -- Corrigiendo la clave foránea
+    id_creator BIGINT NOT NULL REFERENCES users(pk_user),
+        version int default 1 not null
 );

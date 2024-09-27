@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS users(
     profile_pict TEXT DEFAULT 'default' not null,
     hashed_password bytea not null,
     description text default 'none' not null,
-    role user_role DEFAULT 'user' not null
+    role user_role DEFAULT 'user' not null,
+    version int default 1 not null
 );
 
 CREATE INDEX idx_users_email ON users(email);
